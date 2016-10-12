@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
 			//printf("%d\n %s %s %s \n",argc,argv[0],argv[1],argv[2] );		
 		}
 
+	printf("\n%s\n","Ha finalizado baash. Salu2");
 
 
 }

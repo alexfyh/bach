@@ -19,7 +19,7 @@ bool verificador_abs(char * path)
     }
 }
 
-bool analizador(char **argv)
+bool cmd_interno(char **argv)
 {
 	if(strcmp(argv[0],salida)==0)
 	{
@@ -41,20 +41,19 @@ bool analizador(char **argv)
 			else
 			{
 				printf("%s\n", "Direccion no valida");
-				return false;
+				return true;
 			}
 		}
-		
-
-			
-			
-
-
-
-
+		else
+		{
+			return false;
+		}
 
 	}
-/*
+}
+
+void ejecutable()
+{
 	if(*(argv[0])!='/')
 	{
 		//if()
@@ -74,6 +73,7 @@ bool analizador(char **argv)
 			return false;
 		}
 
-	}*/
-}
+	}
 
+
+}

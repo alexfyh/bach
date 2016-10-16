@@ -34,27 +34,15 @@ int main(int argc, char *argv[])
 			int ultimo=strlen(argv[argc-1]);
 			*(argv[argc-1]+ultimo-1)='\0';					//Necesario para cambiar \n por \0
 
-/*
-			if(analizador(argv))
+
+			if(cmd_interno(argv))
 			{
 				//funcion(argc,comando,argumento1,argumento2);
 			}
 			else
 			{
-				printf("%s\n", "No paso analizador");
-				//exit(0);
+				printf("%s\n", "Ejecutable");
 			}
-			*/
-	i=0;		
-   while(i<argc)
-   {
-   		printf( "%d %s%s\n",i, argv[i],"." );
-   		i++;
-   }
-
-
-
-				
 		}
 
 }

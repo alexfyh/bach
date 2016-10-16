@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "lector_funcion.c"
 #include "buscador_funcion.c"
+#include "parseo.c"
+#include "path.c"
 
 int main(int argc, char *argv[])
 {
@@ -10,21 +12,23 @@ int main(int argc, char *argv[])
 	char argumento1[50];
 	char argumento2[50];
 	char path_act_abs[75];
+	char *paths=cadena_path();
+	int cant_paths=cantidad_cadenas(paths,':')+1;
+	char * arreglo_path[cant_paths];
+	asignador(paths,cant_paths,arreglo_path,":");
 
 	while(1)
-	//while(strcmp(comando,salida)!=0)
 
 		{
+
 			//Modificar el system
 			//system("pwd");
 			printf("$");
-			char  ejecutar[50];
-			//redefinir tamano
-			fgets(ejecutar,50,stdin);
-			argc=sscanf(ejecutar,"%s %s %s",comando,argumento1,argumento2);
-			argv[0]=comando;
-			argv[1]=argumento1;
-			argv[2]=argumento2;
+			char  ejecutar[125];
+			fgets(ejecutar,124,stdin);
+			argc=cantidad_cadenas(ejecutar,' ')+1;
+			asignador(ejecutar,argc,argv," ");
+/*
 			if(analizador(argv))
 			{
 				//funcion(argc,comando,argumento1,argumento2);
@@ -34,10 +38,17 @@ int main(int argc, char *argv[])
 				printf("%s\n", "No paso analizador");
 				//exit(0);
 			}
+			*/
+			int i=0;
+   while(i<argc)
+   {
+   		printf( "%d%s\n",i, argv[i] );
+   		i++;
+   }
+
+
+
 				
 		}
-
-	//printf("\n %s \n","Ha finalizado baash...Salu2");
-
 
 }

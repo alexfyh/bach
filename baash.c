@@ -24,10 +24,16 @@ int main(int argc, char *argv[])
 			//Modificar el system
 			//system("pwd");
 			printf("$");
+
+			int i=0;
+
 			char  ejecutar[125];
 			fgets(ejecutar,124,stdin);
 			argc=cantidad_cadenas(ejecutar,' ')+1;
 			asignador(ejecutar,argc,argv," ");
+			int ultimo=strlen(argv[argc-1]);
+			*(argv[argc-1]+ultimo-1)='\0';					//Necesario para cambiar \n por \0
+
 /*
 			if(analizador(argv))
 			{
@@ -39,10 +45,10 @@ int main(int argc, char *argv[])
 				//exit(0);
 			}
 			*/
-			int i=0;
+	i=0;		
    while(i<argc)
    {
-   		printf( "%d%s\n",i, argv[i] );
+   		printf( "%d %s%s\n",i, argv[i],"." );
    		i++;
    }
 

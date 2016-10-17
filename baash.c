@@ -58,14 +58,14 @@ int main(int argc, char *argv[])
 						while(i<argc)				//verificar
 						{
 							argumentos[i]=argv[i];
-							printf("%s\n",argumentos[i] );
+							//printf("%s\n",argumentos[i] );
 							i++;
 						}
-						argumentos[i]=NULL;
-						printf("%s%s\n","Ultimo argumento",argumentos[i] );
+						argumentos[i]=NULL;			//necesario para el excev()
+						//printf("%s%s\n","Ultimo argumento",argumentos[i] );
 						sleep(5);
 						ejecutable(argumentos);
-						printf("%s\n", "Noooooooooo");//while()//PORQUE NO SE IMPRIMEEEE
+						//printf("%s\n", "Noooooooooooo");			//No se imprime por el cambio de excev()
 						exit(0);
 						//sleep(20);
 						

@@ -9,12 +9,12 @@ bool verificador_abs(char * path)
 {
 	if( access( path, F_OK ) != -1 )
 	{
-		printf("%s\n","Accesible" );
+		//printf("%s\n","Accesible" );
 		return true;
 	} 
 	else 
 	{
-		printf("%s\n"," No accesible" );
+		//printf("%s\n"," No accesible" );
 
 		return false;		
     }
@@ -63,17 +63,17 @@ void ejecutable(char * argumentos[])
 	}
 	else
 	{
-		printf("%s\n","Direccion absoluta " );
+		//printf("%s\n","Direccion absoluta " );
 		if(verificador_abs(argumentos[0]))
 		{
-			printf("%s\n","Pasa el verificador absoluto" );
+			//printf("%s\n","Pasa el verificador absoluto" );
 			execv(argumentos[0],argumentos);
 			perror("Error en la ejecucion execv");
 			exit(-1);
 		}
 		else
 		{
-			printf("%s\n",  "fichero? no existente");
+			printf("%s\n",  "Fichero inexistente");
 			return;
 		}
 

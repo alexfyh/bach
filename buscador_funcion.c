@@ -2,6 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdbool.h>
+//#include <>
 #include "comandos.c"
 
 bool verificador_abs(char * path)
@@ -52,9 +53,9 @@ bool cmd_interno(char **argv)
 	}
 }
 
-void ejecutable(char *comando,char * argumentos[])
+void ejecutable(char * argumentos[])
 {
-	if(*(comando)!='/')
+	if(*(argumentos[0])!='/')
 	{
 		//if()
 		printf("%s\n","No se definio para direcciones no absolutas todavia" );
@@ -65,7 +66,10 @@ void ejecutable(char *comando,char * argumentos[])
 		printf("%s\n","Direccion absoluta " );
 		if(verificador_abs(argumentos[0]))
 		{
-			return;
+			printf("%s\n","Pasa el verificador absoluto" );
+			execv(argumentos[0],argumentos);
+			perror("Error en la ejecucion execv");
+			exit(-1);
 		}
 		else
 		{

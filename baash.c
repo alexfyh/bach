@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 			//system("pwd");
 			printf("$");
 
-			int i=0;
+			int i;
 
 			char  ejecutar[125];
 			fgets(ejecutar,124,stdin);
@@ -43,12 +43,28 @@ int main(int argc, char *argv[])
 			}
 			else
 			{
+				
 				pid=fork();
+				
+				//char *argumentos[]
 				if(pid==0)
 					{
-						
-						sleep(10);
-						ejecutable(argv);
+						//char *comando=argv[0];
+						char *argumentos[argc+1];
+						i=0;
+						//printf("%s%s\n", argv[0],".");
+						//printf("%s %s\n","Ejecutar: ",comando );
+						//printf("%s\n","Con los siguientes argumentos: " );
+						while(i<argc)				//verificar
+						{
+							argumentos[i]=argv[i];
+							printf("%s\n",argumentos[i] );
+							i++;
+						}
+						argumentos[i]=NULL;
+						printf("%s%s\n","Ultimo argumento",argumentos[i] );
+						sleep(5);
+						ejecutable(argumentos);
 						printf("%s\n", "Noooooooooo");//while()//PORQUE NO SE IMPRIMEEEE
 						exit(0);
 						//sleep(20);
@@ -69,5 +85,5 @@ int main(int argc, char *argv[])
 					}
 			}
 		}
-
+return 0;
 }

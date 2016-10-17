@@ -55,13 +55,29 @@ bool cmd_interno(char **argv)
 
 void ejecutable(char * argumentos[])
 {
-	if(*(argumentos[0])!='/')
+	if((*(argumentos[0])=='/')|| (*(argumentos[0])=='.'))
+	{
+		int exito=execv(argumentos[0],argumentos);
+		perror("Error en la ejecucion");
+		exit(exito);
+
+	}
+
+	else
+	{
+		printf("%s\n","Bach en proceso..." );
+
+	}
+/*	if(*(argumentos[0])!='/')
 	{
 		if(*(argumentos[0])=='.')
 		{
 			if(*(argumentos[0]+1)=='.')
 			{
-				printf("%s\n","Entro por 2 puntos" );
+				execv(argumentos[0],argumentos)
+				perror("Error en la ejecucion execv");
+				exit(-1);
+				//printf("%s\n","Entro por 2 puntos" );
 			}
 			else
 			{
@@ -88,4 +104,5 @@ void ejecutable(char * argumentos[])
 		}
 
 	}
+*/
 }

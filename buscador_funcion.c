@@ -4,6 +4,40 @@
 #include <stdbool.h>
 //#include <>
 #include "comandos.c"
+//#include "buscador_path"
+
+void buscador_path(char * argumentos[], int cant_path,char * array_path[])
+{
+	int i=0;
+	int estado;
+
+	char  barra[2]="/";
+	printf("%s\n", barra);
+	while(i<cant_path)
+	{
+		char direccion[strlen(array_path[i])+70];			//porque me pinto // luego usar str LIMITADO POR TAMANO
+		strcpy(direccion,array_path[i]);
+		strcat(direccion,barra);
+		strcat(direccion,argumentos[0]);		
+		estado=execv(direccion,argumentos);
+		//printf("%s\n", direccion);
+		
+		array_path[i]=direccion;
+		i++;
+		//direccion=strcat(direccion,array_path[i]);	
+	}
+	if(estado==-1)
+	{
+		printf("%s\n","No se encontro por path..." );
+	}
+	/*
+	i=0;
+	while(i<cant_path)
+	{
+		printf("%s%d%s%s\n", "Path: ",i,array_path[i],".");
+		i++;
+	}*/
+}
 
 bool verificador_abs(char * path)
 {
@@ -53,19 +87,23 @@ bool cmd_interno(char **argv)
 	}
 }
 
-void ejecutable(char * argumentos[])
+void ejecutable(char * argumentos[], int cant_path,char * array_path[])
 {
 	if((*(argumentos[0])=='/')|| (*(argumentos[0])=='.'))
 	{
-		int exito=execv(argumentos[0],argumentos);
-		perror("Error en la ejecucion");
+		int exito=execv(argumentos[0],argumentos);					//Si no se pudo ejecutar execv(), devuelve -1
+		perror("Error en la ejecucion del comando... ");
 		exit(exito);
 
 	}
 
 	else
 	{
-		printf("%s\n","Bach en proceso..." );
+		
+		buscador_path(argumentos,cant_path,array_path);
+		//execv
+		//Salir de este proceso
+		printf("%s\n","path en proceso..." );
 
 	}
 /*	if(*(argumentos[0])!='/')
@@ -106,3 +144,4 @@ void ejecutable(char * argumentos[])
 	}
 */
 }
+

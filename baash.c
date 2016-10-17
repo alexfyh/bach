@@ -13,18 +13,14 @@ int main(int argc, char *argv[])
 	pid_t pid;
 	int status;
 	char comando[50]="";
-//	char path_act_abs[75];
 	char *paths=cadena_path();
 	int cant_paths=cantidad_cadenas(paths,':')+1;
-	char * arreglo_path[cant_paths];
+	char *arreglo_path[cant_paths];
 	asignador(paths,cant_paths,arreglo_path,":");
 
 	while(1)
 
 		{
-
-			//Modificar el system
-			//system("pwd");
 			printf("$");
 
 			int i;
@@ -45,8 +41,6 @@ int main(int argc, char *argv[])
 			{
 				
 				pid=fork();
-				
-				//char *argumentos[]
 				if(pid==0)
 					{
 						//char *comando=argv[0];
@@ -63,8 +57,8 @@ int main(int argc, char *argv[])
 						}
 						argumentos[i]=NULL;			//necesario para el excev()
 						//printf("%s%s\n","Ultimo argumento",argumentos[i] );
-						sleep(5);
-						ejecutable(argumentos);
+						sleep(3);
+						ejecutable(argumentos,cant_paths,arreglo_path);
 						//printf("%s\n", "Noooooooooooo");			//No se imprime por el cambio de excev()
 						exit(0);
 						//sleep(20);

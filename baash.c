@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "lector_funcion.c"
 #include "buscador_funcion.c"
 #include "parseo.c"
 #include "path.c"

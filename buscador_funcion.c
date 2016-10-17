@@ -65,7 +65,6 @@ void ejecutable(char * argv[])
 		printf("%s\n","Direccion absoluta " );
 		if(verificador_abs(argv[0]))
 		{
-			
 			return;
 		}
 		else
@@ -75,6 +74,4 @@ void ejecutable(char * argv[])
 		}
 
 	}
-
-
 }

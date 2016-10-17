@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[])
 {	
-	int pid;
+	pid_t pid;
 	int status;
 	char comando[50]="";
 //	char path_act_abs[75];
@@ -44,18 +44,22 @@ int main(int argc, char *argv[])
 			else
 			{
 				pid=fork();
-				if(pid>0)
+				if(pid==0)
 					{
-						wait(&status);
-						printf("%s\n","Luke,soy tu paaadreee");
+						
+						sleep(10);
+						ejecutable(argv);
+						printf("%s\n", "Noooooooooo");//while()//PORQUE NO SE IMPRIMEEEE
+						exit(0);
+						//sleep(20);
+						
 					}
 					else
 					{
-						if(pid==0)
+						if(pid>0)
 						{
-							sleep(10);
-							ejecutable(argv);
-							printf("%s\n", "Noooooooooo");
+						wait(&status);
+						printf("%s\n","Luke,soy tu paaadreee");
 						}
 						else
 						{

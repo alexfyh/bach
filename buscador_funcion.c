@@ -52,25 +52,26 @@ bool cmd_interno(char **argv)
 	}
 }
 
-void ejecutable()
+void ejecutable(char * argv[])
 {
 	if(*(argv[0])!='/')
 	{
 		//if()
-		//printf("%s\n","No se definio para direcciones no absolutas todavia" );
-		return false;
+		printf("%s\n","No se definio para direcciones no absolutas todavia" );
+		return;
 	}
 	else
 	{
 		printf("%s\n","Direccion absoluta " );
 		if(verificador_abs(argv[0]))
 		{
-			return true;
+			
+			return;
 		}
 		else
 		{
-			printf("%s\n",  "comando no existente");
-			return false;
+			printf("%s\n",  "fichero? no existente");
+			return;
 		}
 
 	}

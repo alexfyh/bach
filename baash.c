@@ -5,13 +5,15 @@
 #include "buscador_funcion.c"
 #include "parseo.c"
 #include "path.c"
+//#include <sys/types.h>
+#include <sys/wait.h>
 
 int main(int argc, char *argv[])
-{
+{	
+	int pid;
+	int status;
 	char comando[50]="";
-	char argumento1[50];
-	char argumento2[50];
-	char path_act_abs[75];
+//	char path_act_abs[75];
 	char *paths=cadena_path();
 	int cant_paths=cantidad_cadenas(paths,':')+1;
 	char * arreglo_path[cant_paths];
@@ -41,7 +43,26 @@ int main(int argc, char *argv[])
 			}
 			else
 			{
-				printf("%s\n", "Ejecutable");
+				pid=fork();
+				if(pid>0)
+					{
+						wait(&status);
+						printf("%s\n","Luke,soy tu paaadreee");
+					}
+					else
+					{
+						if(pid==0)
+						{
+							sleep(10);
+							ejecutable(argv);
+							printf("%s\n", "Noooooooooo");
+						}
+						else
+						{
+							printf("%s\n","La gran Rial" );
+							 perror ("No se pudo crear proceso hijo");
+						}
+					}
 			}
 		}
 

@@ -52,9 +52,9 @@ bool cmd_interno(char **argv)
 	}
 }
 
-void ejecutable(char * argv[])
+void ejecutable(char *comando,char * argumentos[])
 {
-	if(*(argv[0])!='/')
+	if(*(comando)!='/')
 	{
 		//if()
 		printf("%s\n","No se definio para direcciones no absolutas todavia" );
@@ -63,7 +63,7 @@ void ejecutable(char * argv[])
 	else
 	{
 		printf("%s\n","Direccion absoluta " );
-		if(verificador_abs(argv[0]))
+		if(verificador_abs(argumentos[0]))
 		{
 			return;
 		}

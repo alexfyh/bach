@@ -57,8 +57,18 @@ void ejecutable(char * argumentos[])
 {
 	if(*(argumentos[0])!='/')
 	{
-		//if()
-		printf("%s\n","No se definio para direcciones no absolutas todavia" );
+		if(*(argumentos[0])=='.')
+		{
+			if(*(argumentos[0]+1)=='.')
+			{
+				printf("%s\n","Entro por 2 puntos" );
+			}
+			else
+			{
+				printf("%s\n","Entro por un punto" );
+			}
+		}
+		
 		return;
 	}
 	else

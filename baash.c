@@ -41,13 +41,13 @@ int main(int argc, char *argv[])
 			// Verifica si al final hay un &
 			if(strcmp(argv[argc-1],ampersand))
 				{
-				espera=false;
-				//printf("%s\n", "No es igual a &");
+				espera=true;
+				printf("%s\n", "No es igual a &");
 				}
 			else
 			{
-				espera=true;
-				//printf("%s\n", "Igual a &");
+				espera=false;
+				printf("%s\n", "Igual a &");
 				argv[argc-1]=NULL;
 			}
 
@@ -87,12 +87,14 @@ int main(int argc, char *argv[])
 					{
 						if(pid>0)
 						{
-							if(!espera)
+							if(espera)
 							{
 								printf("%s\n","Esperando al proceso hijo" );
 								wait(&status);
+
+
 							}
-							else
+
 						//printf("%s@%s:%s$ ", user, hostname,getcwd(NULL,50));
 						printf("%s\n","Luke,soy tu paaadreee");
 						}

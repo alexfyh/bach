@@ -12,7 +12,7 @@ void buscador_path(char * argumentos[], int cant_path,char * array_path[])
 	int estado;
 
 	char  barra[2]="/";
-	printf("%s\n", barra);
+	//printf("%s\n", barra);
 	while(i<cant_path)
 	{
 		char direccion[strlen(array_path[i])+70];			//porque me pinto // luego usar str LIMITADO POR TAMANO
@@ -68,8 +68,8 @@ bool cmd_interno(char **argv)
 		{
 			if (chdir(argv[1])==0)
 			{
-				printf("%s\n", "Direccion actual");
-				system("pwd");
+				//printf("%s\n", "Direccion actual");
+				//system("pwd");
 				return true;
 
 			}
@@ -103,7 +103,7 @@ void ejecutable(char * argumentos[], int cant_path,char * array_path[])
 		buscador_path(argumentos,cant_path,array_path);
 		//execv
 		//Salir de este proceso
-		printf("%s\n","path en proceso..." );
+		//printf("%s\n","path en proceso..." );
 
 	}
 /*	if(*(argumentos[0])!='/')

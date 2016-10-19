@@ -42,6 +42,23 @@ void asignador(char * cadena,int size,char * arreglo[], char *separador)
 }
 
 /*
+int catidad_comandos(int argc,char * argv[])
+{
+	int posicion=0;
+	if(posicion<argc)
+	{
+		if(strcmp(argv[i],menor)||strcmp(argv[i],mayor)||strcmp(argv[i],tuberia))
+		{
+
+		}
+
+
+	posicion++;
+	}
+	
+}
+*/
+/*
 
 int main ()
 {

@@ -9,6 +9,10 @@
 
 int main(int argc, char *argv[])
 {	
+	char hostname [20];
+	gethostname(hostname,20);
+	char* user;
+	user = getlogin();
 	pid_t pid;
 	int status;
 	char comando[50]="";
@@ -20,8 +24,8 @@ int main(int argc, char *argv[])
 	while(1)
 
 		{
-			printf("$");
-
+			//printf("$");
+			printf("%s@%s:%s$ ", user, hostname,getcwd(NULL,50));
 			int i;
 
 			char  ejecutar[125];

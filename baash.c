@@ -7,8 +7,7 @@
 //#include <sys/types.h>
 #include <sys/wait.h>
 #include <fcntl.h>
-
-//#include <stdbool.h>
+#include <stdbool.h>
 
 int main(int argc, char *argv[])
 {	
@@ -60,98 +59,75 @@ int main(int argc, char *argv[])
 
 					if(fork()==0)
 					{
-						
+						//  MODIFICAR PARA QUE NO SEA APPEND
 						destino_fichero = open (file, O_CREAT|O_APPEND|O_WRONLY, S_IWUSR|S_IRUSR);
 						dup2 (destino_fichero, 1);
 	    				close (destino_fichero);
 						ejecutable(argv,cant_paths,arreglo_path);
-	    				exit (1);
+	    				exit (-1);
 					}
-					printf("%s\n","Despues del >>>>>>>" );
+					//printf("%s\n","Despues del >>>>>>>" );
 
 				}
-				else
+				else		// Operador <<<<<<<<<
 				{
 					if(strcmp(argv[argc-2],menor)==0)
 					{
 						char * file=argv[argc-1];
 						argv[argc-1]=NULL;
 						argv[argc-2]=NULL;
-						
 						//printf("%d\n", origen_fichero);
-						printf("%s\n", "<<<<<<<");
+						//printf("%s\n", "<<<<<<<");
 						if(fork()==0)
 						{
 							int origen_fichero=open(file,O_RDONLY,124);
 							dup2(origen_fichero,0);
 							close(origen_fichero);
 							ejecutable(argv,cant_paths,arreglo_path);
+							exit(-1);
 						}
 					}
-					printf("%s\n","Despues de <<<<<<<" );
+					else		// Operador &&&&&&&&&&&
+					{
+						if(strcmp(argv[argc-1],ampersand))
+						{
+							espera=true;
+							//printf("%s\n", "No es igual a &");
+						}
+						else
+						{
+							espera=false;
+							//printf("%s\n", "Igual a &");
+							argv[argc-1]=NULL;
+						}
+						
 
+						if ((id_hijo = fork ()) == 0)
+						{
+							//Instrucciones para el hijo
+							ejecutable(argv,cant_paths,arreglo_path);
+							exit(-1);
 
+						}
+						else
+						{
+							if(espera)
+							{
+							printf("%s\n","Esperando al proceso hijo" );
+								while (waitpid (id_hijo, &status, 0) != id_hijo)
+								{
+								sleep(1);
+								}
+							}
+
+							printf("%s\n","Luke,soy tu paaadreee");
+						}
+					}
 				}
-
-				//Operador  &&&&&&&&&&&&&&&&&&&&&
-
-
 			}
-				printf("%s\n","Antes del &&&&&&&&" );
-				if(strcmp(argv[argc-1],ampersand))
-				{
-					espera=true;
-					//printf("%s\n", "No es igual a &");
-				}
-				else
-				{
-					espera=false;
-					//printf("%s\n", "Igual a &");
-					argv[argc-1]=NULL;
-
-				}
+		}
 
 				
-				if ((id_hijo = fork ()) == 0)
-					{
-						//char *comando=argv[0];
-						char *argumentos[argc+1];
-						int i=0;
-						while(i<argc)				//verificar
-						{
-							argumentos[i]=argv[i];
-							i++;
-						}
-						argumentos[i]=NULL;			//necesario para el excev()
-						//printf("%s%s\n","Ultimo argumento",argumentos[i] );
-						sleep(5);
-						ejecutable(argumentos,cant_paths,arreglo_path);
-						exit(-1);
-						
-					}
-					else
-					{
-						if(espera)
-						{
-							printf("%s\n","Esperando al proceso hijo" );
-							while (waitpid (id_hijo, &status, 0) != id_hijo)
-							{
-								sleep(1);
-							}
-							//wait(&status);
-
-						}
-
-						//printf("%s@%s:%s$ ", user, hostname,getcwd(NULL,50));
-						printf("%s\n","Luke,soy tu paaadreee");
-						/*else
-						{
-							printf("%s\n","La gran Rial" );
-							perror ("No se pudo crear proceso hijo");
-						}*/
-					}
-			
-			}
-		
 return 0;
 }
+

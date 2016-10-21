@@ -39,10 +39,10 @@ int main(int argc, char *argv[])
 			char  ejecutar[125];
 			fgets(ejecutar,124,stdin);
 			argc=cantidad_cadenas(ejecutar,' ')+1;
-			asignador(ejecutar,argc,argv," ");
+			asignador(ejecutar,argc,argv," ");							// El string leido lo copia en argv[]
 			int ultimo=strlen(argv[argc-1]);
 			*(argv[argc-1]+ultimo-1)='\0';								//Le cambia el \n  por \0	
-
+printf("%d\n", argc);
 			if(cmd_interno(argv))
 			{
 
@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 			else
 			{
 				// Operador >>>>>>>>>>>>>>>>>>>>
-				if(strcmp(argv[argc-2],mayor)==0)
+				if((argc>2)&&strcmp(argv[argc-2],mayor)==0)
 				{
 					char * file=argv[argc-1];
 					argv[argc-1]=NULL;
@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
 				}
 				else		// Operador <<<<<<<<<
 				{
-					if(strcmp(argv[argc-2],menor)==0)
+					if((argc>2)&&strcmp(argv[argc-2],menor)==0)
 					{
 						char * file=argv[argc-1];
 						argv[argc-1]=NULL;
@@ -89,23 +89,55 @@ int main(int argc, char *argv[])
 					}
 					else		// Operador &&&&&&&&&&&
 					{
-						if(strcmp(argv[argc-1],ampersand))
+						if(strcmp(argv[argc-1],ampersand)==0)
 						{
-							espera=true;
-							//printf("%s\n", "No es igual a &");
+							espera=false;
+							printf("%s\n", " Es igual a &");
+							argv[argc-1]=NULL;
 						}
 						else
 						{
-							espera=false;
-							//printf("%s\n", "Igual a &");
-							argv[argc-1]=NULL;
+							espera=true;
+							printf("%s\n", "No igual a &");
+							
 						}
 						
+
 
 						if ((id_hijo = fork ()) == 0)
 						{
 							//Instrucciones para el hijo
-							ejecutable(argv,cant_paths,arreglo_path);
+							printf("%s\n","Entra al fork" );
+							if(espera)
+							{
+								printf("%d\n", argc);
+								int indice=0;
+								char * argumentos[argc];
+								while(indice<argc)
+								{
+									printf("%s%s\n","Argumentos originales" ,argv[indice] );
+									indice++;
+								}
+								indice=0;
+								while(indice<argc)
+								{
+									argumentos[indice]=argv[indice];
+									printf("%d %s\n",indice,argumentos[indice] );
+									indice++;
+								}
+
+								argumentos[indice]=NULL;
+								printf("%d %s\n",indice,argumentos[indice] );
+
+								ejecutable(argumentos,cant_paths,arreglo_path);	
+							}
+							else
+							{
+								
+								
+								ejecutable(argv,cant_paths,arreglo_path);	
+							}
+							
 							exit(-1);
 
 						}
@@ -114,9 +146,9 @@ int main(int argc, char *argv[])
 							if(espera)
 							{
 							printf("%s\n","Esperando al proceso hijo" );
-								while (waitpid (id_hijo, &status, 0) != id_hijo)
+								//while (waitpid (id_hijo, &status, 0) != id_hijo)
 								{
-								sleep(1);
+								//sleep(1);
 								}
 							}
 

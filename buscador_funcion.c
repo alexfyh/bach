@@ -2,6 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include "comandos.c"
 
 void buscador_path(char * argumentos[], int cant_path,char * array_path[])

@@ -19,19 +19,19 @@ int main(int argc, char *argv[])
 	user = getlogin();
 	//pid_t pid;
 	int status;
-	char comando[50]="";
+//	char comando[50]="";
 	char *paths=cadena_path();
 	int cant_paths=cantidad_cadenas(paths,':')+1;
 	char *arreglo_path[cant_paths];
 	asignador(paths,cant_paths,arreglo_path,":");
-	bool espera=true;
+	//bool espera=true;
 
 	//printf("%s@%s:%s$ ", user, hostname,getcwd(NULL,50));
-	pid_t id_padre;
+	//pid_t id_padre;
 	pid_t id_hijo;
-	id_padre=getpid();
-	char Buffer[124];
-	int fd[2];
+	//id_padre=getpid();
+	//char Buffer[124];
+	//int fd[2];
 	while(1)
 
 		{
@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 					{
 						if(strcmp(argv[argc-1],ampersand)==0)
 						{
-							espera=false;
+							//espera=false;
 							//printf("%s\n", " Es igual a &");
 							argv[argc-1]=NULL;
 							if ((id_hijo = fork ()) == 0)
@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
 						}
 						else
 						{
-							espera=true;
+							//espera=true;
 							
 							int i=1;        //necesita algun comando antes del |||||
 								while((argc>2&&i<argc-1)&&(strcmp(argv[i],tuberia)!=0))
@@ -119,8 +119,8 @@ int main(int argc, char *argv[])
 								//printf("%s%d\n","Posicion: ",i );
 								if(i<argc-1)
 								{
-									pid_t hijo1;
-									pid_t hijo2;
+									//pid_t hijo1;
+									//pid_t hijo2;
 									char * primercmd [i+1];
 									char * segundocmd [argc-i];
 									int indice=0;

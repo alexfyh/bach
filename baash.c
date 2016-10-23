@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 			asignador(ejecutar,argc,argv," ");							// El string leido lo copia en argv[]
 			int ultimo=strlen(argv[argc-1]);
 			*(argv[argc-1]+ultimo-1)='\0';								//Le cambia el \n  por \0	
-printf("%d\n", argc);
+//printf("%d\n", argc);
 			if(cmd_interno(argv))
 			{
 
@@ -94,7 +94,7 @@ printf("%d\n", argc);
 						if(strcmp(argv[argc-1],ampersand)==0)
 						{
 							espera=false;
-							printf("%s\n", " Es igual a &");
+							//printf("%s\n", " Es igual a &");
 							argv[argc-1]=NULL;
 							if ((id_hijo = fork ()) == 0)
 							{
@@ -116,7 +116,7 @@ printf("%d\n", argc);
 								{
 									i++;
 								}
-								printf("%s%d\n","Posicion: ",i );
+								//printf("%s%d\n","Posicion: ",i );
 								if(i<argc-1)
 								{
 									pid_t hijo1;
@@ -128,7 +128,7 @@ printf("%d\n", argc);
 									{
 										primercmd[indice]=argv[indice];
 
-										printf("%s%s\n", "primer arreglo ",primercmd[indice]);
+										//printf("%s%s\n", "primer arreglo ",primercmd[indice]);
 										indice++;
 									}
 									primercmd[indice]=NULL;
@@ -137,7 +137,7 @@ printf("%d\n", argc);
 									while(i<argc)
 									{
 										segundocmd[indice]=argv[i];
-										printf("%s%s\n","segundo arreglo ",segundocmd[indice] );
+										//printf("%s%s\n","segundo arreglo ",segundocmd[indice] );
 										indice++;
 										i++;
 									}
@@ -168,7 +168,7 @@ printf("%d\n", argc);
 								      }
 								      else
 								      {
-								      	printf("%s\n", "Padre del pipe");
+								      	//printf("%s\n", "Padre del pipe");
 								      }
 
 
@@ -183,14 +183,14 @@ printf("%d\n", argc);
 										while(indice<argc)
 										{
 											argumentos[indice]=argv[indice];
-											printf("%d %s\n",indice,argumentos[indice] );
+											//printf("%d %s\n",indice,argumentos[indice] );
 											indice++;
 										}
 										argumentos[indice]=NULL;
 										indice=0;
 										while(indice<argc+1)
 										{
-											printf("%s%s\n","argumentos: ",argumentos[indice] );
+											//printf("%s%s\n","argumentos: ",argumentos[indice] );
 											indice++;
 										}
 										ejecutable(argumentos,cant_paths,arreglo_path);

@@ -94,65 +94,78 @@ printf("%d\n", argc);
 							espera=false;
 							printf("%s\n", " Es igual a &");
 							argv[argc-1]=NULL;
+							if ((id_hijo = fork ()) == 0)
+							{
+								ejecutable(argv,cant_paths,arreglo_path);	
+
+							}
+							else
+							{
+								printf("%s\n","Proceso padre" );
+							}
+
 						}
 						else
 						{
 							espera=true;
-							printf("%s\n", "No igual a &");
 							
-						}
-						
-
-
-						if ((id_hijo = fork ()) == 0)
-						{
-							//Instrucciones para el hijo
-							printf("%s\n","Entra al fork" );
-							if(espera)
-							{
-								printf("%d\n", argc);
-								int indice=0;
-								char * argumentos[argc];
-								while(indice<argc)
+							int i=1;        //necesita algun comando antes del |||||
+								while((argc>2&&i<argc-1)&&(strcmp(argv[i],tuberia)!=0))
 								{
-									printf("%s%s\n","Argumentos originales" ,argv[indice] );
+									i++;
+								}
+								if(i<argc-1)
+								{
+									int indice=0;
+									while(indice<i)
+									{
+										printf("%s%s\n", "primer arreglo ",argv[indice]);
+										indice++;
+									}
 									indice++;
+									while(indice<argc)
+									{
+										printf("%s%s\n","segundo arreglo ",argv[indice] );
+										indice++;
+									}
+
+
+
+									printf("%s\n","definir aca pipe" );
 								}
-								indice=0;
-								while(indice<argc)
+								else
 								{
-									argumentos[indice]=argv[indice];
-									printf("%d %s\n",indice,argumentos[indice] );
-									indice++;
-								}
+									if ((id_hijo = fork ()) == 0)
+									{
+										char * argumentos[argc+1];
+										int indice=0;
+										while(indice<argc)
+										{
+											argumentos[indice]=argv[indice];
+											printf("%d %s\n",indice,argumentos[indice] );
+											indice++;
+										}
+										argumentos[indice]=NULL;
+										indice=0;
+										while(indice<argc+1)
+										{
+											printf("%s%s\n","argumentos: ",argumentos[indice] );
+											indice++;
+										}
+										ejecutable(argumentos,cant_paths,arreglo_path);
+										printf("%s\n","Comando no valido..." );
+										exit(-1);
 
-								argumentos[indice]=NULL;
-								printf("%d %s\n",indice,argumentos[indice] );
-
-								ejecutable(argumentos,cant_paths,arreglo_path);	
-							}
-							else
-							{
-								
-								
-								ejecutable(argv,cant_paths,arreglo_path);	
-							}
-							
-							exit(-1);
-
-						}
-						else
-						{
-							if(espera)
-							{
-							printf("%s\n","Esperando al proceso hijo" );
-								//while (waitpid (id_hijo, &status, 0) != id_hijo)
-								{
-								//sleep(1);
-								}
-							}
-
-							printf("%s\n","Luke,soy tu paaadreee");
+									}
+									else
+									{
+										printf("%s\n","Esperando al proceso hijo" );
+										while (waitpid (id_hijo, &status, 0) != id_hijo)
+										{
+										sleep(1);
+										}
+									}
+								}							
 						}
 					}
 				}

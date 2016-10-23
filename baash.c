@@ -8,6 +8,8 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include <stdbool.h>
+#define LECTURA 0
+#define ESCRITURA 1
 
 int main(int argc, char *argv[])
 {	
@@ -117,6 +119,8 @@ printf("%d\n", argc);
 								printf("%s%d\n","Posicion: ",i );
 								if(i<argc-1)
 								{
+									pid_t hijo1;
+									pid_t hijo2;
 									char * primercmd [i+1];
 									char * segundocmd [argc-i];
 									int indice=0;
@@ -138,10 +142,37 @@ printf("%d\n", argc);
 										i++;
 									}
 									segundocmd[indice]=NULL;
-									ejecutable(segundocmd,cant_paths,arreglo_path);
+
+									int fides[2];
+									pipe(fides);
+									if(fork())
+									{
 
 
-									printf("%s\n","definir aca pipe" );
+									if (fork () == 0)
+								       {
+								       close (fides[LECTURA]);
+								       dup2 (fides[ESCRITURA], 1);
+								       close (fides[ESCRITURA]);
+								       ejecutable(primercmd,cant_paths,arreglo_path);
+								       perror (primercmd[0]);
+								       }
+								    else
+								       {
+								       close (fides[ESCRITURA]);
+								       dup2 (fides[LECTURA], 0);
+								       close (fides[LECTURA]);
+								       ejecutable(segundocmd,cant_paths,arreglo_path);
+								       perror (segundocmd[0]);
+								       }
+								      }
+								      else
+								      {
+								      	printf("%s\n", "Padre del pipe");
+								      }
+
+
+									//printf("%s\n","definir aca pipe" );
 								}
 								else
 								{

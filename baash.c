@@ -114,21 +114,31 @@ printf("%d\n", argc);
 								{
 									i++;
 								}
+								printf("%s%d\n","Posicion: ",i );
 								if(i<argc-1)
 								{
+									char * primercmd [i+1];
+									char * segundocmd [argc-i];
 									int indice=0;
 									while(indice<i)
 									{
-										printf("%s%s\n", "primer arreglo ",argv[indice]);
-										indice++;
-									}
-									indice++;
-									while(indice<argc)
-									{
-										printf("%s%s\n","segundo arreglo ",argv[indice] );
-										indice++;
-									}
+										primercmd[indice]=argv[indice];
 
+										printf("%s%s\n", "primer arreglo ",primercmd[indice]);
+										indice++;
+									}
+									primercmd[indice]=NULL;
+									indice=0;
+									i++;
+									while(i<argc)
+									{
+										segundocmd[indice]=argv[i];
+										printf("%s%s\n","segundo arreglo ",segundocmd[indice] );
+										indice++;
+										i++;
+									}
+									segundocmd[indice]=NULL;
+									ejecutable(segundocmd,cant_paths,arreglo_path);
 
 
 									printf("%s\n","definir aca pipe" );

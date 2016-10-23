@@ -51,7 +51,7 @@ bool cmd_interno(char **argv)
 
 	if(strcmp(argv[0],salida)==0)
 	{
-		printf("\n %s \n","Ha finalizado baash...Salu2");
+		printf("\n %s \n","Ha finalizado baash.");
 		exit(0);
 
 	}
